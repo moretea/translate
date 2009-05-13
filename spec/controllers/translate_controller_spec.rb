@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe TranslateController do
@@ -114,7 +115,7 @@ describe TranslateController do
       Translate::Storage.should_receive(:new).with(:en).and_return(storage)
       log = mock(:log)
       log.should_receive(:write_to_file)
-      Translate::Log.should_receive(:new).with(:sv, :en, key_param.keys).and_return(log)
+      Translate::Log.should_receive(:new).with(I18n.default_locale, :en, key_param.keys).and_return(log)
       post :translate, "key" => key_param
       response.should be_redirect
     end
