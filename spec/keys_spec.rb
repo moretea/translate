@@ -15,7 +15,8 @@ describe Translate::Keys do
   
   describe "to_hash" do
     it "return a hash with I18n keys and file lists" do
-      @keys.to_hash[:'article.key3'].should == ["vendor/plugins/translate/spec/files/translate/app/models/article.rb"]      
+      @keys.to_hash[:'article.key3'].size.should == 1
+      @keys.to_hash[:'article.key3'].first.should satisfy{|i| i.end_with?("spec/files/translate/app/models/article.rb")}
     end
   end
 
