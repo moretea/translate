@@ -37,7 +37,7 @@ namespace :translate do
   task :lost_in_translation => :environment do
     LOCALE = I18n.default_locale
     keys = []; result = []; locale_hash = {}
-    Dir.glob(File.join("config", "locales", "**","#{LOCALE}.yml")).each do |locale_file_name|
+    Dir.glob(File.join(Translate.locales_dir, "**","#{LOCALE}.yml")).each do |locale_file_name|
       locale_hash = locale_hash.deep_merge(YAML::load(File.open(locale_file_name))[LOCALE])
     end
     lookup_pattern = Translate::Keys.new.send(:i18n_lookup_pattern)
