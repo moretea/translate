@@ -40,7 +40,7 @@ namespace :translate do
     locale_files = Dir.glob(File.join(Translate.locales_dir, "**","#{LOCALE}.yml"))
     locale_files.each do |locale_file_name|
       locale_hash = locale_hash.deep_merge(YAML::load(File.open(locale_file_name))[LOCALE.to_s])
-    endn
+    end
     lookup_pattern = Translate::Keys.new.send(:i18n_lookup_pattern)
     Dir.glob(File.join("app", "**","*.{erb,rb,rhtml}")).each do |file_name|
       File.open(file_name, "r+").each do |line|
