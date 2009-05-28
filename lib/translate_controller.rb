@@ -6,7 +6,7 @@ class TranslateController < ActionController::Base
   layout 'translate'
 
   before_filter :init_translations
-  before_filter :set_locale
+  before_filter :set_from_and_to_locales
   
   def index
     initialize_keys
@@ -140,7 +140,7 @@ class TranslateController < ActionController::Base
     I18n.default_locale
   end
   
-  def set_locale
+  def set_from_and_to_locales
     session[:from_locale] ||= default_locale
     session[:to_locale] ||= :en
     session[:from_locale] = params[:from_locale] if params[:from_locale].present?
