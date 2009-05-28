@@ -75,7 +75,7 @@ class Translate::Keys
       IO.read(file).scan(i18n_lookup_pattern).flatten.map(&:to_sym).each do |key|
         files[key] ||= []
         path = Pathname.new(File.expand_path(file)).relative_path_from(Pathname.new(Rails.root)).to_s
-        files[key] << path if !files[key].include?(path)
+        files[key] << path unless files[key].include?(path)
       end
       files
     end
