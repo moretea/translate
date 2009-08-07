@@ -103,7 +103,7 @@
 			<td width="350" valign=top>
 				<%= link_to_function 'Auto translate', "getGoogleTranslation('#{key}', \"#{escape_javascript(from_text)}\", '#{@from_locale}', '#{@to_locale}')", :style => 'padding: 0; margin: 0;' %><br />
 				<small>Key: <%=h key %></small><br />
-				<% if @files[key] %><small>File: <%= @files[key].join("<br/>") %></small><% end %>
+				<% if @files.try(:[], key) %><small>File: <%= @files[key].join("<br/>") %></small><% end %>
 			</td>
 		  </tr>
 		  <tr><td colspan=5><small>&nbsp;</small></td></tr>
