@@ -166,10 +166,10 @@ class TranslateController < ActionController::Base
   end
 
   def set_load_path
-    dirs = Dir[ File.join(Rails.root, 'config', 'locales', 'rails', '**', '*.{rb,yml}') ]
-    I18n.load_path -= dirs
-    yield
-    I18n.load_path += dirs
+    original_path = I18n.load_path
+    I18n.load_path = Dir[ File.join(Rails.root, 'config', 'locales', '*.yml') ]
+      yield
+    I18n.load_path = original_path
   end
 
 end
