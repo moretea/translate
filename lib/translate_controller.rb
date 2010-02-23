@@ -5,6 +5,8 @@ class TranslateController < ActionController::Base
   prepend_view_path(File.join(File.dirname(__FILE__), "..", "views"))
   layout 'translate'
 
+  around_filter :set_load_path
+
   before_filter :init_translations
   before_filter :set_from_and_to_locales
 
@@ -162,4 +164,12 @@ class TranslateController < ActionController::Base
   def log_hash
     @log_hash ||= Translate::Log.new(@from_locale, @to_locale, {}).read
   end
+
+  def set_load_path
+    original_path = I18n.load_path
+    I18n.load_path = Dir[ File.join(Rails.root, 'config', 'locales', '*.yml') ]
+      yield
+    I18n.load_path = original_path
+  end
+
 end
