@@ -33,7 +33,7 @@ class Translate::Log
   def file_path
     #make sure diff log dir exists
     translate_log_dir = File.join(RAILS_ROOT,  'log', 'translate')
-    File.mkdir_p(translate_log_dir)
+    FileUtils.mkdir_p(translate_log_dir)
     File.join(translate_log_dir, "from_#{from_locale}_to_#{to_locale}.yml")
   end
 end
