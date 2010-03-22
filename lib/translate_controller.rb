@@ -167,7 +167,7 @@ class TranslateController < ActionController::Base
 
   def set_load_path
     original_path = I18n.load_path
-    I18n.load_path = Dir[ File.join(Rails.root, 'config', 'locales', '*.yml') ]
+    I18n.load_path.reject! { |path| path =~ /config\/locales\/default/ }
       yield
     I18n.load_path = original_path
   end
